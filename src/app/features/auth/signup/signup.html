@@ -1,0 +1,92 @@
+<div class="container mt-5">
+  <div class="card p-4 shadow">
+    <h2 class="mb-4 text-center">Signup</h2>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          id="email"
+          type="email"
+          class="form-control"
+          formControlName="email"
+        />
+
+        @if (signupForm.get('email')?.touched && signupForm.get('email')?.invalid) {
+          <div class="text-danger mt-1">
+            @if (signupForm.get('email')?.errors?.['required']) {
+              <small>Email is required</small>
+            }
+            @if (signupForm.get('email')?.errors?.['email']) {
+              <small>Invalid email</small>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          id="password"
+          type="password"
+          class="form-control"
+          formControlName="password"
+        />
+
+        @if (signupForm.get('password')?.touched && signupForm.get('password')?.invalid) {
+          <div class="text-danger mt-1">
+            @if (signupForm.get('password')?.errors?.['required']) {
+              <small>Password is required</small>
+            }
+            @if (signupForm.get('password')?.errors?.['minlength']) {
+              <small>Minimum 8 characters</small>
+            }
+            @if (signupForm.get('password')?.errors?.['weakPassword']) {
+              <small>
+                Must include uppercase, lowercase, number, special character
+              </small>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          class="form-control"
+          formControlName="confirmPassword"
+        />
+
+        @if (signupForm.get('confirmPassword')?.touched &&
+        signupForm.get('confirmPassword')?.invalid) {
+          <div class="text-danger mt-1">
+            @if (signupForm.get('confirmPassword')?.errors?.['required']) {
+              <small>Confirm password is required</small>
+            }
+          </div>
+        }
+
+        @if (signupForm.errors?.['passwordMismatch'] &&
+        signupForm.get('confirmPassword')?.touched) {
+          <div class="text-danger mt-1">
+            <small>Passwords do not match</small>
+          </div>
+        }
+      </div>
+
+      <!-- Submit -->
+      <button
+        class="btn btn-primary w-100"
+        type="submit"
+        [disabled]="signupForm.invalid"
+      >
+        Sign Up
+      </button>
+    </form>
+  </div>
+</div>

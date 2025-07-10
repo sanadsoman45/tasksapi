@@ -1,0 +1,79 @@
+.layout {
+  display: flex;
+
+  &.collapsed {
+    .sidebar {
+      width: 60px;
+
+      .sidebar-link {
+        justify-content: center;
+
+        span {
+          display: none;
+        }
+      }
+
+      .hamburger {
+        align-self: center;
+      }
+    }
+
+    .ms-sidebar {
+      margin-left: 60px;
+    }
+  }
+
+  .sidebar {
+    width: 220px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: width 0.3s ease;
+    z-index: 1000;
+    padding-top: 1rem;
+
+    .hamburger {
+      border: none;
+      background: none;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: white;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #ffd700;
+      }
+
+      &.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #ffd700;
+      }
+
+      i {
+        font-size: 1.25rem;
+      }
+    }
+
+    img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+    }
+  }
+
+  .ms-sidebar {
+    margin-left: 220px;
+    transition: margin-left 0.3s ease;
+    padding: 1rem;
+    width: 100%;
+  }
+}

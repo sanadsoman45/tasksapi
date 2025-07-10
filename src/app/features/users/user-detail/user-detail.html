@@ -1,0 +1,12 @@
+<div class="card p-4 shadow-sm">
+  <h2 class="mb-4">{{ user?.name }}</h2>
+
+  <p><strong>Email:</strong> {{ user?.email }}</p>
+  <p><strong>Phone:</strong> {{ user?.phone }}</p>
+  <p><strong>Website:</strong> {{ user?.website }}</p>
+
+  <a routerLink="/users" class="btn btn-primary mt-3">
+    <span class="material-icons align-middle me-1">arrow_back</span>
+    Back to Users List
+  </a>
+</div>
