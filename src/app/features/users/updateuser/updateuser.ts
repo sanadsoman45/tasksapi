@@ -1,39 +1,37 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  AbstractControl,
-  ValidationErrors,
-  ValidatorFn,
-  ReactiveFormsModule,
-} from '@angular/forms';
-
-import { RouterModule } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, ValidationErrors, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-signup',
-  standalone: true,
-  imports: [ReactiveFormsModule, RouterModule],
-  templateUrl: './signup.html',
-  styleUrl: './signup.scss',
+  selector: 'app-updateuser',
+  imports: [ReactiveFormsModule],
+  templateUrl: './updateuser.html',
+  styleUrl: './updateuser.scss',
 })
-export class Signup {
+export class Updateuser {
   signupForm: FormGroup;
 
   constructor(private fb: FormBuilder, private toaster: ToastrService) {
     this.signupForm = this.fb.group(
       {
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(8), this.strongPasswordValidator()]],
-        confirmPassword: ['', [Validators.required]],
+        email: ['test@gmail.com', [Validators.required, Validators.email]],
+        password: [
+          'Test@123#',
+          [
+            Validators.required,
+            Validators.minLength(8),
+            this.strongPasswordValidator(),
+          ],
+        ],
+        confirmPassword: ['Test@123#', [Validators.required]],
       },
       { validators: [this.passwordMatchValidator] }
     );
   }
 
-  passwordMatchValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+  passwordMatchValidator: ValidatorFn = (
+    group: AbstractControl
+  ): ValidationErrors | null => {
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
     return password && confirmPassword && password !== confirmPassword
@@ -52,8 +50,7 @@ export class Signup {
 
   onSubmit() {
     if (this.signupForm.valid) {
-      this.toaster.success('Account Creation successful!');
-       
+      this.toaster.success('Account Update successful!');
     }
   }
 }

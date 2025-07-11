@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import {
   FormBuilder,
@@ -8,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Auth } from '../../../core/Services/auth';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +21,7 @@ export class Login {
   constructor(
     private fb: FormBuilder,
     private authService: Auth,
-    private snackBar: MatSnackBar,
+    private toaster: ToastrService,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
@@ -50,11 +49,8 @@ export class Login {
             gender: 'male' | 'female' | 'other';
             image: string;
           }) => {
-            this.snackBar.open('Login successful!', 'Close', {
-              duration: 3000,
-              panelClass: ['snack-success'],
-            });
-            this.router.navigateByUrl('/dashboard')
+            this.toaster.success('Login successful!');
+            this.router.navigateByUrl('/dashboard');
             localStorage.setItem('accessToken', data.accessToken);
             localStorage.setItem('refreshToken', data.refreshToken);
           },

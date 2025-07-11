@@ -39,6 +39,13 @@ export const routes: Routes = [
             (m) => m.UserDetail
           ),
       },
+      {
+        path: 'update',
+        loadComponent: () =>
+          import('./features/users/updateuser/updateuser').then(
+            (m) => m.Updateuser
+          ),
+      },
     ],
   },
 ];
